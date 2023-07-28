@@ -17,22 +17,23 @@ export const ContactForm = () => {
     setNumber('');
   };
   const contacts = useSelector(state => state.contacts);
+
+  const handleSubmit = (contacts, dispatch, name, number, reset) => {
+  const existingContact = contacts.find(
+    (value) => value.name.toLowerCase() === name.toLowerCase()
+  );
+
+  if (existingContact) {
+    alert(`${name} is already in contacts`);
+  } else {
+    dispatch(add({ name, number }));
+  }
+
+  reset();
+};
+
   return (
-    <FormInfo
-      onSubmit={e => {
-        e.preventDefault();
-        if (
-          contacts.some(
-            value => value.name.toLocaleLowerCase() === name.toLocaleLowerCase()
-          )
-        ) {
-          alert(`${name} is alredy in contacts`);
-        } else {
-          dispatch(add({ name, number }));
-        }
-        reset();
-      }}
-    >
+    <FormInfo onSubmit={(e) => handleSubmit(contacts, dispatch, name, number, reset)}>
       
         <LabelText>
           Name

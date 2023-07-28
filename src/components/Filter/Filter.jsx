@@ -7,12 +7,11 @@ export const Filter = () => {
   const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
   return (
-
-    <FilterLabel > Find contacts by name
-        <SpanFilter>
-        <InputSearch type="text" value={filter} onChange={evt => dispatch(qwery(evt.currentTarget.value))} name="filter"/>
-            <Icon>{svgGood}</Icon>
-            </SpanFilter>
+    <FilterLabel>Find contacts by name
+      <SpanFilter>
+        <InputSearch type="text" value={filter} onChange={evt => dispatch(qwery(evt.currentTarget.value))} name="filter" />
+        <Icon>{svgGood}</Icon>
+      </SpanFilter>
     </FilterLabel>
   );
 };
