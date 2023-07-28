@@ -18,22 +18,21 @@ export const ContactForm = () => {
   };
   const contacts = useSelector(state => state.contacts);
 
-  const handleSubmit = (contacts, dispatch, name, number, reset) => {
-  const existingContact = contacts.find(
-    (value) => value.name.toLowerCase() === name.toLowerCase()
-  );
-
-  if (existingContact) {
-    alert(`${name} is already in contacts`);
-  } else {
-    dispatch(add({ name, number }));
-  }
-
-  reset();
-};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const existingContact = contacts.find(
+      (value) => value.name.toLowerCase() === name.toLowerCase()
+    );
+    if (existingContact) {
+      alert(`${name} is already in contacts`);
+    } else {
+      dispatch(add({ name, number }));
+    }
+    reset();
+  };
 
   return (
-    <FormInfo onSubmit={(e) => handleSubmit(contacts, dispatch, name, number, reset)}>
+    <FormInfo onSubmit={handleSubmit}>
       
         <LabelText>
           Name
